@@ -7,7 +7,7 @@ export function Header() {
         {/* Logo */}
         <div className="flex items-center gap-3">
           <img 
-            src="/images/expresstec-logo.png" 
+            src="/images/logo-hero.png" 
             alt="ExpressTec Logo" 
             className="h-14 w-auto drop-shadow-lg"
           />

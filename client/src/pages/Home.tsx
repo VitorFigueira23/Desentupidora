@@ -5,6 +5,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2, Clock, ShieldCheck, Wrench, Droplet, AlertCircle, Zap, Star } from "lucide-react";
 import { Footer } from "@/components/layout/Footer";
 import { ContactSection } from "@/components/ContactSection";
+import { Phone, ArrowRight, Shield, PenTool as Tool, Droplets, ArrowDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+// Componente rápido para o ícone do WhatsApp (SVG)
+const WhatsappLogo = ({ className }: { className?: string }) => (
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
+  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.768-.001 1.298.38 2.27 1.019 3.287l-.682 2.472 2.566-.675c1.13.592 2.072.868 3.13.868 3.182 0 5.768-2.587 5.768-5.768 0-3.181-2.585-5.768-5.767-5.768zm0 10.199c-.962 0-1.842-.247-2.738-.708l-1.51.397.405-1.482c-.588-.933-.947-1.844-.947-2.902 0-2.527 2.053-4.58 4.582-4.58 2.528 0 4.58 2.053 4.58 4.58s-2.052 4.58-4.58 4.58zm2.521-3.428c-.14-.07-.819-.404-.945-.45-.126-.047-.218-.07-.309.07-.092.14-.355.45-.436.543-.08.093-.162.105-.302.035-.14-.07-.593-.219-1.13-.697-.418-.373-.701-.834-.783-.975-.081-.14-.009-.216.062-.286.063-.063.14-.163.21-.245.07-.08.094-.138.141-.23.047-.093.023-.174-.012-.245-.035-.07-.309-.745-.424-1.021-.111-.267-.225-.231-.309-.235-.081-.004-.174-.004-.267-.004-.093 0-.245.035-.373.175-.129.14-1.002.926-1.002 2.26 0 1.334.971 2.591 1.104 2.774.133.183 1.912 2.919 4.633 4.093.648.279 1.153.446 1.545.57.651.206 1.243.177 1.713.107.525-.078 1.617-.661 1.845-1.299.229-.638.229-1.185.161-1.299-.069-.115-.255-.186-.395-.256z"/>
+</svg>
+);
 
 export default function Home() {
   return (
@@ -14,49 +23,75 @@ export default function Home() {
       {/* Spacer for fixed header */}
       <div className="h-20" />
       
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/images/hero-bg.jpg" 
-            alt="Tubulacao" 
-            className="w-full h-full object-cover opacity-40"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-overlay" />
-        </div>
+      {/* HERO SECTION - Imagem Colagem Fixa com Overlay */}
+      <section 
+        id="inicio" 
+        className="relative min-h-[90vh] flex items-center justify-center bg-cover bg-center bg-no-repeat bg-fixed pt-20 pb-16 overflow-hidden"
+        style={{
+          // Certifique-se que a imagem está salva com esse nome na pasta public/images
+          backgroundImage: `url('/images/hero-collage.png')`
+        }}
+      >
+        
+        {/* Overlay Escuro Pesado (Essencial para ler o texto por cima da colagem) */}
+        {/* Ajuste o 'bg-black/80' se quiser mais claro (70) ou mais escuro (90) */}
+        <div className="absolute inset-0 bg-black/90 z-0 backdrop-blur-[2px]"></div>
 
-        <div className="container relative z-10 pt-20 pb-12">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold uppercase tracking-wider text-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-              </span>
-              Atendimento 24 Horas
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold uppercase leading-[0.9] tracking-tight text-white drop-shadow-2xl animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
-              Desentupidora em Sua Cidade?<br />
-              <span className="text-primary text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-400">Nós Resolvemos</span><br />
-              <span className="text-4xl md:text-6xl text-white/80">Em instantes</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-light animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-              ExpressTec oferece serviço rápido, limpo e com garantia. Chegamos onde você estiver para resolver seu problema de encanamento entupido agora. Atendimento 24 horas em toda a região.
-            </p>
-            
-            <div className="pt-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
-              <WhatsAppButton className="scale-125" />
-              <p className="mt-4 text-sm text-gray-400 uppercase tracking-widest">Orçamento Grátis e Sem Compromisso</p>
-            </div>
+        <div className="container relative z-10 px-4 flex flex-col items-center text-center">
+          
+          {/* LOGO EM DESTAQUE (Opcional, já que tem na imagem de fundo, mas ajuda a focar) */}
+          <div className="mb-8 animate-in fade-in slide-in-from-bottom-5 duration-700">
+            <img 
+              src="/images/logo-hero.png" 
+              alt="Desentupidora Jato Clean Logo" 
+              className="w-full max-w-[250px] md:max-w-[350px] h-auto drop-shadow-2xl mx-auto"
+            />
           </div>
+
+          {/* TÍTULO PRINCIPAL */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold text-white uppercase leading-tight mb-6 tracking-wide drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200">
+            Desentupidora e <span className="text-primary block md:inline">Dedetizadora</span>
+          </h1>
+
+          {/* SUBTÍTULO */}
+          <p className="text-lg md:text-2xl text-gray-200 max-w-3xl mb-10 leading-relaxed font-light drop-shadow-lg animate-in fade-in slide-in-from-bottom-7 duration-1000 delay-300">
+            Soluções rápidas para sua residência ou comércio. <br className="hidden md:block" />
+            <strong className="text-primary font-medium">Atendimento emergencial 24 horas.</strong>
+          </p>
+
+          {/* BOTÕES */}
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
+            
+            {/* Botão WhatsApp */}
+            <Button 
+              size="lg" 
+              className="bg-green-600 hover:bg-green-700 text-white font-bold uppercase tracking-widest text-lg px-8 py-6 h-auto shadow-lg hover:shadow-green-500/30 transition-all w-full sm:w-auto flex items-center justify-center gap-3 border-2 border-green-500"
+              onClick={() => window.open("https://wa.me/5511999999999", "_blank")}
+            >
+              <WhatsappLogo className="w-6 h-6" />
+               Orçamento via WhatsApp
+            </Button>
+
+            {/* Botão Ligar */}
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="border-white text-white hover:bg-white/20 font-bold uppercase tracking-widest px-8 py-6 h-auto w-full sm:w-auto flex items-center justify-center gap-3 bg-black/50 backdrop-blur-sm"
+              onClick={() => window.location.href = "tel:11999999999"}
+            >
+              <Phone className="w-5 h-5" />
+              Ligar Agora (24h)
+            </Button>
+          </div>
+
         </div>
         
-        {/* Diagonal Cut at Bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-background transform origin-bottom-right -skew-y-2 translate-y-12 z-20"></div>
+        {/* Seta rolar para baixo */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 animate-bounce drop-shadow-lg">
+            <ArrowDown className="w-8 h-8" />
+        </div>
       </section>
+
 
       {/* Services Section */}
       <section id="servicos" className="py-24 relative z-20 bg-background">
@@ -220,7 +255,7 @@ export default function Home() {
       </section>
       
       {/* SEÇÃO QUEM SOMOS (NOVA) */}
-      <section id="sobre" className="py-20 bg-white">
+      <section id="sobre" className="py-20 bg-zinc-900">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-12">
             
@@ -239,10 +274,10 @@ export default function Home() {
               <div className="inline-block px-3 py-1 bg-primary/10 text-primary font-bold text-sm uppercase tracking-wider rounded-full">
                 Sobre Nós
               </div>
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 uppercase">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase">
                 Experiência que resolve o seu problema
               </h2>
-              <p className="text-gray-600 leading-relaxed text-lg">
+              <p className="text-gray-300 leading-relaxed text-lg">
                 A <span className="font-bold text-primary">Desentupidora ExpressTec</span> não é apenas mais uma empresa. Somos especialistas em situações críticas.
               </p>
               <ul className="space-y-4">
@@ -252,7 +287,7 @@ export default function Home() {
                   "Atendimento limpo e organizado",
                   "Garantia de serviço prestado"
                 ].map((item, index) => (
-                  <li key={index} className="flex items-center gap-3 text-gray-700 font-medium">
+                  <li key={index} className="flex items-center gap-3 text-gray-300 font-medium">
                     <div className="h-2 w-2 bg-primary rounded-full"></div>
                     {item}
                   </li>
