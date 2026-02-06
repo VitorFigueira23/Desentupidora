@@ -34,10 +34,11 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* LOGO */}
-        <Link href="/">
-          <a className="text-2xl font-display font-bold uppercase tracking-wider text-white">
-            Desentupidora <span className="text-primary">Express</span>
-          </a>
+        <Link 
+          href="/" 
+          className="text-2xl font-display font-bold uppercase tracking-wider text-white hover:opacity-80 transition-opacity"
+        >
+          Desentupidora <span className="text-primary">Express</span>
         </Link>
 
         {/* MENU DESKTOP */}
