@@ -33,13 +33,13 @@ export function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        {/* LOGO */}
-        <Link 
+        {/* LOGO SIMPLIFICADO */}
+        <a 
           href="/" 
-          className="text-2xl font-display font-bold uppercase tracking-wider text-white hover:opacity-80 transition-opacity"
+          className="text-2xl font-display font-bold uppercase tracking-wider text-white hover:opacity-80 transition-opacity cursor-pointer"
         >
           Desentupidora <span className="text-primary">Express</span>
-        </Link>
+        </a>
 
         {/* MENU DESKTOP */}
         <div className="hidden md:flex items-center gap-8">
