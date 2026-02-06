@@ -50,7 +50,7 @@ export default function Home() {
 
           {/* TÍTULO PRINCIPAL */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold text-white uppercase leading-tight mb-6 tracking-wide drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200">
-            Desentupidora e <span className="text-primary block md:inline">Dedetizadora</span>
+            ExpressTec <span className="text-primary block md:inline">Desentupidora</span>
           </h1>
 
           {/* SUBTÍTULO */}
@@ -363,42 +363,42 @@ export default function Home() {
             {[
               {
                 name: "Maria Silva",
-                city: "São Paulo, SP",
+                city: "Bertioga, SP",
                 rating: 5,
                 text: "Excelente serviço! Chegaram rápido e resolveram meu problema de entupimento em minutos. Muito profissional e higiênico. Recomendo!",
                 service: "Desentupimento de Pia"
               },
               {
                 name: "João Santos",
-                city: "São Paulo, SP",
+                city: "Bertioga, SP",
                 rating: 5,
                 text: "Melhor desentupidora que já contratei. Preço justo, atendimento atencioso e garantia de 90 dias. Voltaria a contratar com certeza!",
                 service: "Desentupimento de Esgoto"
               },
               {
                 name: "Ana Costa",
-                city: "São Paulo, SP",
+                city: "Bertioga, SP",
                 rating: 5,
                 text: "Chegaram em 20 minutos! Resolveram o entupimento do banheiro sem quebrar nada. Muito bom mesmo, super recomendo!",
                 service: "Desentupimento de Vaso Sanitário"
               },
               {
                 name: "Carlos Oliveira",
-                city: "São Paulo, SP",
+                city: "Mongaguá, SP",
                 rating: 5,
                 text: "Serviço impecável! Limparam a caixa de gordura com profissionalismo. Voltei a usar a pia normalmente. Muito obrigado!",
                 service: "Limpeza de Caixa de Gordura"
               },
               {
                 name: "Fernanda Gomes",
-                city: "São Paulo, SP",
+                city: "Guaruja, SP",
                 rating: 5,
                 text: "Atendimento 24 horas funcionando mesmo! Chamei à noite e vieram logo. Problema resolvido, cliente feliz. Parabéns!",
                 service: "Desentupimento Geral"
               },
               {
                 name: "Roberto Martins",
-                city: "São Paulo, SP",
+                city: "Santos, SP",
                 rating: 5,
                 text: "Profissionais competentes e educados. Explicaram tudo que fizeram e deixaram tudo limpo. Vale cada centavo investido!",
                 service: "Desobstrução de Tubulação"

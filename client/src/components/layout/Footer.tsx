@@ -18,9 +18,9 @@ export function Footer() {
               Tecnologia de ponta e equipe qualificada para atender sua residência ou empresa com segurança e limpeza.
             </p>
             <div className="flex gap-4 pt-2">
-              <a href="#" className="hover:text-primary transition-colors"><Instagram className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-primary transition-colors"><Facebook className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-primary transition-colors"><Linkedin className="w-5 h-5" /></a>
+              <a href="https://www.instagram.com/expresstec_desentupidora/?utm_source=ig_web_button_share_sheet" className="hover:text-primary transition-colors"><Instagram className="w-5 h-5" /></a>
+              {/* <a href="#" className="hover:text-primary transition-colors"><Facebook className="w-5 h-5" /></a>
+              <a href="#" className="hover:text-primary transition-colors"><Linkedin className="w-5 h-5" /></a> */}
             </div>
           </div>
 
@@ -39,17 +39,17 @@ export function Footer() {
           <div>
             <h4 className="text-white font-bold uppercase tracking-wider mb-6">Fale Conosco</h4>
             <ul className="space-y-4 text-sm">
-              <li className="flex items-start gap-3">
+              {/* <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary shrink-0" />
                 <span>Av. Paulista, 1000 - Bela Vista<br />São Paulo - SP</span>
-              </li>
+              </li>  */}
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
                 <span>(11) 99999-9999</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                <span>contato@desentupidora.com</span>
+                <span>expresstecdesentupidora@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -79,7 +79,7 @@ export function Footer() {
 
         {/* Linha Divisória */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-          <p>&copy; {new Date().getFullYear()} Desentupidora Express. Todos os direitos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} Desentupidora ExpressTec. Todos os direitos reservados.</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-white transition-colors">Política de Privacidade</a>
             <a href="#" className="hover:text-white transition-colors">Termos de Uso</a>
