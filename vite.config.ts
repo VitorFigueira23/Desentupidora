@@ -4,9 +4,11 @@ import path from "path"
 
 export default defineConfig({
   plugins: [react()],
-  root: "client", // <--- O SEGREDO: Dizemos que o código está aqui dentro
+  // Define explicitamente onde está o index.html (pasta client)
+  root: path.resolve(__dirname, "client"),
   build: {
-    outDir: "../dist", // <--- E mandamos jogar o site pronto na raiz do projeto
+    // Define explicitamente para salvar na raiz do projeto (fora da pasta client)
+    outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
   },
   resolve: {
