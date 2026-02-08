@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter"; // Removi o Link do wouter pois não estamos usando no logo
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSmartContact } from "@/hooks/useSmartContact";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [location] = useLocation();
+  // const [location] = useLocation(); // Não estamos usando location aqui, pode remover se quiser
+  const { contact, loading } = useSmartContact();
 
   // Efeito para mudar a cor da navbar quando rolar a página
   useEffect(() => {
@@ -19,7 +21,7 @@ export function Navbar() {
 
   const navLinks = [
     { name: "Início", href: "/" },
-    { name: "Serviços", href: "/#servicos" }, // Iremos criar essa âncora depois
+    { name: "Serviços", href: "/#servicos" },
     { name: "Sobre Nós", href: "/#sobre" },
     { name: "Contato", href: "/#contato" },
   ];
@@ -33,12 +35,12 @@ export function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        {/* LOGO SIMPLIFICADO */}
+        {/* LOGO */}
         <a 
           href="/" 
           className="text-2xl font-display font-bold uppercase tracking-wider text-white hover:opacity-80 transition-opacity cursor-pointer"
         >
-          Desentupidora <span className="text-primary">Express</span>
+          Desentupidora <span className="text-primary">ExpressTec</span>
         </a>
 
         {/* MENU DESKTOP */}
@@ -53,13 +55,19 @@ export function Navbar() {
             </a>
           ))}
           
-          <Button 
-            className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest gap-2"
-            onClick={() => window.open("https://wa.me/5511999999999", "_blank")} // Substitua pelo número real
+          {/* SOLUÇÃO DEFINITIVA: Botão envolvido em Link HTML */}
+          <a 
+            href={`https://wa.me/${contact?.whatsapp}`} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="no-underline"
           >
-            <Phone className="w-4 h-4" />
-            (11) 99999-9999
-          </Button>
+            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest gap-2">
+              <Phone className="w-4 h-4" />
+              {/* Mostra o número correto visualmente */}
+              {loading ? "Carregando..." : (contact?.phone || "Whatsapp")}
+            </Button>
+          </a>
         </div>
 
         {/* MENU MOBILE (Hambúrguer) */}
@@ -84,9 +92,18 @@ export function Navbar() {
               {link.name}
             </a>
           ))}
-          <Button className="w-full bg-green-600 hover:bg-green-700 mt-2 text-white">
-            Chamar no WhatsApp
-          </Button>
+          
+          {/* SOLUÇÃO DEFINITIVA MOBILE */}
+          <a 
+            href={`https://wa.me/${contact?.whatsapp}`} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="w-full mt-2"
+          >
+            <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+              Chamar no WhatsApp ({loading ? "..." : (contact?.phone || "")})
+            </Button>
+          </a>
         </div>
       )}
     </nav>

@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
+import { useSmartContact } from "@/hooks/useSmartContact";
 
 export function WhatsAppButton({ className = "" }: { className?: string }) {
+  const { contact, loading } = useSmartContact();
   const whatsappNumber = "5511999999999"; // Placeholder number
   const message = "Olá! Preciso de um orçamento urgente.";
-  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappLink = `https://wa.me/${contact?.whatsapp}?text=${encodeURIComponent(message)}`;
 
   return (
     <a 

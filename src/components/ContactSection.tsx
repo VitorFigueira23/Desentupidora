@@ -1,7 +1,9 @@
 import { Phone, Mail, MapPin, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSmartContact } from "@/hooks/useSmartContact";
 
 export function ContactSection() {
+  const { contact, loading } = useSmartContact();
   return (
     <section id="contato" className="relative py-24 bg-zinc-900 overflow-hidden">
       {/* Elemento decorativo de fundo */}
@@ -35,7 +37,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg">Ligue Agora</h3>
-                  <p className="text-gray-400">Atendimento 24h: (11) 99999-9999</p>
+                  <p className="text-gray-400">Atendimento 24h: {contact?.phone}</p>
                 </div>
               </div>
 

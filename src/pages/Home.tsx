@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ContactSection } from "@/components/ContactSection";
 import { Phone, ArrowRight, Shield, PenTool as Tool, Droplets, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSmartContact } from "@/hooks/useSmartContact";
 
 // Componente rápido para o ícone do WhatsApp (SVG)
 const WhatsappLogo = ({ className }: { className?: string }) => (
@@ -16,6 +17,7 @@ const WhatsappLogo = ({ className }: { className?: string }) => (
 );
 
 export default function Home() {
+  const { contact, loading } = useSmartContact();
   return (
     <div className="min-h-screen bg-background text-foreground font-body selection:bg-primary selection:text-primary-foreground overflow-x-hidden">
       <Header />
@@ -60,28 +62,38 @@ export default function Home() {
           </p>
 
           {/* BOTÕES */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
+         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
             
-            {/* Botão WhatsApp */}
-            <Button 
-              size="lg" 
-              className="bg-green-600 hover:bg-green-700 text-white font-bold uppercase tracking-widest text-lg px-8 py-6 h-auto shadow-lg hover:shadow-green-500/30 transition-all w-full sm:w-auto flex items-center justify-center gap-3 border-2 border-green-500"
-              onClick={() => window.open("https://wa.me/5511999999999", "_blank")}
+            {/* Botão WhatsApp - Envolvido em Link 'a' com Crase (`) */}
+            <a 
+              href={`https://wa.me/${contact?.whatsapp}`} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
             >
-              <WhatsappLogo className="w-6 h-6" />
-               Orçamento via WhatsApp
-            </Button>
+              <Button 
+                size="lg" 
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold uppercase tracking-widest text-lg px-8 py-6 h-auto shadow-lg hover:shadow-green-500/30 flex items-center justify-center gap-3 border-2 border-green-500"
+              >
+                <WhatsappLogo className="w-6 h-6" />
+                Orçamento via WhatsApp
+              </Button>
+            </a>
 
-            {/* Botão Ligar */}
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="border-white text-white hover:bg-white/20 font-bold uppercase tracking-widest px-8 py-6 h-auto w-full sm:w-auto flex items-center justify-center gap-3 bg-black/50 backdrop-blur-sm"
-              onClick={() => window.location.href = "tel:11999999999"}
+            {/* Botão Ligar - Envolvido em Link 'a' com Crase (`) */}
+            <a 
+              href={`tel:${contact?.phone}`}
+              className="w-full sm:w-auto"
             >
-              <Phone className="w-5 h-5" />
-              Ligar Agora (24h)
-            </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="w-full border-white text-white hover:bg-white/20 font-bold uppercase tracking-widest px-8 py-6 h-auto flex items-center justify-center gap-3 bg-black/50 backdrop-blur-sm"
+              >
+                <Phone className="w-5 h-5" />
+                Ligar Agora {loading ? "..." : contact?.phone}
+              </Button>
+            </a>
           </div>
 
         </div>

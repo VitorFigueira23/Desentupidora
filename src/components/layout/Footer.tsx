@@ -1,6 +1,8 @@
 import { MapPin, Phone, Mail, Clock, ShieldCheck, Facebook, Instagram, Linkedin } from "lucide-react";
+import { useSmartContact } from "@/hooks/useSmartContact";
 
 export function Footer() {
+  const { contact, loading } = useSmartContact();
   return (
     <footer className="bg-black text-gray-400 pt-16 pb-8 border-t border-white/10 font-body">
       <div className="container mx-auto px-4">
@@ -45,7 +47,7 @@ export function Footer() {
               </li>  */}
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                <span>(11) 99999-9999</span>
+                <span>{contact?.phone}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
