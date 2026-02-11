@@ -31,64 +31,55 @@ const CITIES_043 = [
   "Arapongas"
 ];
 
-const CITIES_TESTE = ["Bauru", "Agudos", "Piratininga"];
+const CITIES_014 = ["Bauru", "Agudos", "Piratininga", "Lencois", "Lençóis"];
 
 export function useSmartContact() {
-  // Começa com NULL para não mostrar nada errado antes de saber a região
   const [contact, setContact] = useState<any>(null);
   const [isAllowed, setIsAllowed] = useState(false);
   const [userCity, setUserCity] = useState("Localizando...");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // A. Verifica se tem teste forçado na URL (ex: ?cidade=Londrina)
+    // A. Verifica Teste de URL
     const params = new URLSearchParams(window.location.search);
     const testeCidade = params.get("cidade");
-
-    // B. Monta a URL do Worker
     let workerUrl = 'https://geo-api-desentupidora.expresstecdesentupidora-9d5.workers.dev/';
-    // Se tiver teste na URL, avisa o Worker para fingir que estamos lá
-    if (testeCidade) {
-        workerUrl += `?cidade=${testeCidade}`;
-    }
+    if (testeCidade) workerUrl += `?cidade=${testeCidade}`;
 
-    // C. Consulta a Inteligência
     fetch(workerUrl)
       .then(res => res.json())
       .then(data => {
         const city = data.city || "";
-        const region = data.region || ""; // O Estado (SP, PR...)
-        const country = data.country || "";
-
+        const region = data.region || ""; 
+        
         setUserCity(city);
-        console.log(`📍 Cliente detectado: ${city} (${region})`);
+        console.log(`📍 Detectado: ${city} (${region})`);
 
-        // --- D. LÓGICA DE DECISÃO BLINDADA (FALLBACK) ---
+        // --- LÓGICA DE DECISÃO (Ajustada para priorizar Bauru em SP) ---
 
-        // 1. Prioridade: Teste Local (Bauru)
-        if (CITIES_TESTE.some(c => city.includes(c))) {
-          setContact(REGIONAL_DATA.bauru);
+        // 1. É LITORAL? (Verificação Específica)
+        // Só mostra 013 se tiver CERTEZA que é uma cidade do litoral.
+        if (CITIES_013.some(c => city.includes(c))) {
+          setContact(REGIONAL_DATA.litoral);
           setIsAllowed(true);
         }
         
-        // 2. Região PARANÁ (043)
-        // Se a cidade for Londrina (preciso) OU se o Estado for PR (segurança 4G)
+        // 2. É PARANÁ? (Verificação Estado ou Cidade)
         else if (CITIES_043.some(c => city.includes(c)) || region === "PR") {
           setContact(REGIONAL_DATA.londrina);
           setIsAllowed(true);
         }
         
-        // 3. Região SÃO PAULO (013)
-        // Se a cidade for do Litoral (preciso) OU se o Estado for SP (segurança 4G)
-        // Obs: Quem estiver na Capital (SP) pelo 4G cairá aqui e verá o telefone do Litoral.
-        else if (CITIES_013.some(c => city.includes(c)) || region === "SP" || region.includes("Paulo")) {
-          setContact(REGIONAL_DATA.litoral);
+        // 3. É SÃO PAULO GERAL? (Cai aqui Bauru, Capital e 4G)
+        // Se for Bauru específico OU se for Estado SP genérico -> Manda para 014
+        else if (CITIES_014.some(c => city.includes(c)) || region === "SP" || region.includes("Paulo")) {
+          setContact(REGIONAL_DATA.bauru);
           setIsAllowed(true);
         }
 
-        // 4. Bloqueio Total (Outros Estados/Países)
+        // 4. BLOQUEIO (Outros Estados/Países)
         else {
-          console.warn("🚫 Acesso Bloqueado:", city, region);
+          console.warn("🚫 Bloqueado:", city);
           setContact(null);
           setIsAllowed(false);
         }
@@ -96,9 +87,10 @@ export function useSmartContact() {
         setLoading(false);
       })
       .catch(err => {
-        console.error("Erro na API de Localização:", err);
-        // Em caso de erro na API (raro), liberamos o padrão (Litoral) para não perder venda
-        setContact(REGIONAL_DATA.litoral);
+        // Em caso de erro na API, qual deve ser o padrão?
+        // Antes estava Litoral, agora mudei para Bauru (mais seguro para você)
+        console.error("Erro API Geo:", err);
+        setContact(REGIONAL_DATA.bauru);
         setIsAllowed(true);
         setLoading(false);
       });
